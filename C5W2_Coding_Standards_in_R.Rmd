@@ -1,0 +1,81 @@
+---
+title: "Coding Standards in R"
+author: "Mr. Sachin B."
+date: "15/05/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Coding Standards in R
+
+- Coding standards in R are really important because they help you make your code readable and allow you and other people to understand what's going on in your code.
+- Of course, it's difficult to get everyone to agree on one set of ideas. But there are a couple of very basic minimal standards that are important when you're coding in R. 
+
+1. Always use text files / text editor
+2. Indent your code
+3. Limit the width of your code (80 columns)
+4. Limit the length of individual functions
+
+<hr>
+
+### 1. Always use text files / text editor
+
+- The first principle is very important in any programming language, not just R, is to use text editor.
+- A text file is a basic standard that usually doesn't have any sort of formatting or any sort of kind of special appearance.
+- It's just text and typically it's going to be ASCII text. 
+- The basic idea is that a text format can be read by pretty much any basic editing program.  
+- These days, when you're writing something, there's a lot of different tools that you can use to write.
+  - If you're writing a book or a webpage; there's all kinds of different tools that you can use to write to use, to write those things.
+  - But when you're writing code you should always try to use a text editor because that's the kind of least common denominator.
+
+<hr>
+
+### 2. Indent your code
+
+- The second principle is very important for readability, is to indent your code. 
+- Indenting is the idea that different blocks of codes should be spaced over to the right. A little bit more than other blocks of codes so, you can see 
+  - how the control flow, 
+  - how the flow of the program goes based on the indenting alone.
+- Indentation clearly shows us where the function begins and ends.
+
+<hr>
+
+### 3. Limit the width of your code (80 columns) 
+
+- Coupled with indenting is the third principle is very simple which the limit the width of your code. 
+- So, you have indenting, it's possible to indent off to the right forever.
+  - So you need to limit on the right hand side how wide your code is going to be, and 
+  - usually this is kind of determined by number of columns of text.
+  - So one possibility is you limit your text to about **80 columns** of text, so that, the width of your code never exceeds that. 
+- One of the advantages of having appropriate space indent is coupled with an 80 character margin on the right hand side is that it forces you to think about your code in a slightly different way.
+- **Example**: If you have eight space indents if you are going to have a *for loop* nested within another *for loop* within another *for loop*.
+  - Every time you add  for loop by the time you will get to your fourth nested four loop. You're pretty much hitting the right hand column at the 80 column margin
+  - So the nice thing about the eight space indent, coupled with the 80 column margin is that
+    - It prevents you from making fundamental mistakes with code readability.
+    - You might be able to do easily more than two nested four loops but that's really the boundary of what is readable in terms of code.
+  - Typically, except for some special cases, a three nested or four nested for-loop is difficult to read, and it's probably better splitting off into separate functions or something similar.
+- So, a good indenting policy not only makes the code more readable but it actually can force you to think about writing your code in a slightly different way. 
+  - So that's a really nice advantage of having a logical indenting policy coupled with a right hand side restriction
+  
+### 4. Limit the length of individual functions
+
+- The logical thing to do with the function is to limit to one basic activity.
+- Example, if your function is named, **read the data** then your function should simply read the data.
+  - It should not read the data, process it, fit a model, and then print some output.
+  - So the logical steps like that should probably be split into separate functions.
+- There are a couple of different advantages to doing this.
+
+  1. First of all it's nice to have a function written on a single page of code.
+    - So you don't have to scroll endlessly, to see where all the code for this function goes.
+    - If you can put entire function on one screen of the editor, then you can look at the whole function and see what it does all at once.
+    
+  2. Another advantage of splitting up your code onto logical sections, to logical functions is that
+  
+  - If you use functions like trace back or the profile or the debugger. These often tell you where in the function call stack you are when a problem occurs. 
+    i. If you have multiple functions that are all logically divided into separate pieces. Then when a bug occurs and it occurs in a certain type of function, or a certain function, then you know  where to go to fix things.
+    ii. If you have a single function that just goes on forever and a bug occurs, then the only thing that the debugger or the traceback or the profiler can tell you is that there's a problem in this one function. But it doesn't to tell you where exactly the problem occurs.
+  - So splitting up your functions has a secondary benefit which is that it can help you in debug and profiling. 
+- So limiting the size of your functions is very useful for readability and for debugging. 
