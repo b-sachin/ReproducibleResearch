@@ -1,0 +1,405 @@
+---
+title: "Do's and Don't for Reproducible Analysis"
+author: "Mr. Sachin B."
+date: "22/05/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Do's
+
+1. Start With Good Science
+2. Teach a Computer
+3. Use Some Version Control
+4. Keep Track of Your Software Environment
+5. Set Your Seed
+6. Think About the Entire Pipeline
+
+
+## 2. Don't
+
+1. Do Things By Hand
+2. Point And Click
+3. Save Output
+
+<hr>
+
+## 1. Do's
+
+### 1.1 Start With Good Science
+
+- Garbage in, garbage out
+- Coherent, focused question simplifies many problems
+- Working with good collaborators reinforces good practices
+- Something that's interesting to you will (hopefully) motivate good habits
+
+<hr>
+
+#### 1.1.1 Garbage in, garbage out
+
+- The idea here is you going to be working on something that's interesting to you, that you think is to come interesting to other people.
+  - Because if you start with something that you don't like or you don't think is good, then you're just going to end up probably with something that's not good on the out. 
+  - So, garbage in, garbage out is the basic idea here.
+
+#### 1.1.2 Coherent, focused question simplifies many problems
+
+- Start with some good science and make sure you have a question or a goal that's relatively focused and coherent.
+- Basically, that's not always possible, depending on the types of problems that you're working on. But in general, the more coherent and focused question that you can work on the simpler that your problem will be.
+- And because a narrower question or a more focused type of question tends to rule out a lot of possibilities that you won't have to worry about.
+- But if you have a very broad and very vague type of question then you'll have lots of things to deal with and lots of things to think about and generally increase the complexity of your problem.
+
+#### 1.1.3 Working with good collaborators reinforces good practices
+
+- You should always work with people who are good collaborators, people who you'd like to work with, people that, you think that have a good working relationship with, because we don't have good working relationships, then this can lead to other bad practices.
+- So good work collaborators generally reinforce good work practices. 
+
+#### 1.1.4 Something that's interesting to you will (hopefully) motivate good habits
+
+- Make sure that something that is interesting to you because if you are interested in the idea then hopefully that will motivate you to have some good habits.
+- So, the first thing you should always deal with is, start with something that's good, start with some good science, start with some good interesting topics.
+
+<hr>
+
+### 1.2 Teach a Computer
+
+- If something needs to be done as part of your analysis/investigation, try to teach your computer to do it (even if you only need to do it once)
+- In order to give your computer instructions, you need to write down exactly what you mean to do and how it should be done
+- Teaching a computer almost guarantees reproducibilty
+
+<hr>
+
+- The antidote to doing things by hand is that you should always try to teach a computer to do whatever it is about to do.
+- So, that's the idea is that you're going to, you want to try to automate, in some sense everything that you do in your analysis.
+
+#### 1.2.1 If something needs to be done as part of your analysis/investigation, try to teach your computer to do it (even if you only need to do it once)
+
+- If you're working with data, the parts of your kind of project that work with the data, that process the data, you should always try to teach a computer to do it.
+- If you can teach a computer to do it, then you have a solid rules and concrete instructions for what to do. And so there's no room for fuzziness to play into the data analysis because the computer doesn't accept, generally speaking, won't accept that kind of fuzziness. They need exact programming instructions.
+
+#### 1.2.2 In order to give your computer instructions, you need to write down exactly what you mean to do and how it should be done
+
+- When you give instructions to a computer, essentially what you're doing, is you're writing down exactly what you mean to do and how it should be done. And that is essentially the definition of reproducibility.
+    
+#### 1.2.3 Teaching a computer almost guarantees reproducibilty
+
+- So, if you can teach a computer, it's almost guaranteed that what you're going to do is reproducible to a large extent. And so even if you're going to do something just once.
+- It is useful to try to teach a computer to do it. And it may involve using a different, using a variety of programming languages. You might use R, you might use something else. But if you can get your computer to do something for you that's always better for reproducibility.
+- It may be less convenient for you because it takes longer to program a computer. But it will pay you back in the sense that everything that you do in this way will be reproducible.
+
+
+#### Example:
+
+- It is very common that you'll have to do in most projects is to download some data and this data might be available on the web. 
+- So for one example you can might
+  1. go to the [UCI machine learning repository](http://archive.ics.uci.edu/ml/).
+  2. then you might go to the [Bike Sharing Dataset](http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset), so you click on the bike sharing data set web page.
+  3. You click on the data folder and 
+  4. then inside the data folder is a link to the zip file which contains the data set.
+  5. You can choose the "**save as linked file**" in your web browser
+  6. then you have to name a file on your local computer and a folder and
+  7. then save it, right.
+- So these are all things that are very natural to do. But you'll notice that the list of instructions that we had to discuss was actually rather lengthy for this very simple operation.
+- So, an alternative is to just teach your computer to do all that. And in fact, in R, it's quite straightforward.
+- You can use the download.file function. and then just download the file directly onto your computer. 
+
+```{r, eval=FALSE}
+
+download.file("http://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip", "ProjectData/Bike-Sharing-Dataset.zip")
+
+```
+
+#### Explanation:
+
+Notice here that
+
+- The full URL to the dataset file is specified (no clicking through a series of links)
+- The name of the file saved to your local computer is specified
+- The directory in which the file was saved is specified ("ProjectData")
+- Code can always be executed in R (as long as link is available)  
+
+<hr>
+
+- first of all you'll notice that the full URL to the dataset is specified, So, there's no ambiguity there.
+- You don't have to click on the website, then click on the folder, then click on the zip file. 
+- You get the whole URL to the, to the dataset. It's right there. It's very specific And furthermore. 
+- The name of the file that you save to your computer is also specified.
+- So, for example, if you download a file using a web browser, you always have the option of renaming the file to be something else. But if that's not documented then, then it's very difficult to link the renamed file to the original dataset on the web. But here we explicitly specify in the code that the local dataset is going to be called `Bike-Sharing-Dataset.zip`. And so. - Now we know what file to look for after this code has been executed.
+- We know exactly which directory we saved the data set to.
+- So we saved the data set to a directory called `ProjectData`. And so now we don't have to wonder what directory the dataset was saved to, well, you know, for example in the, in, downloading it from the website through the web browser. And this code can always be executed in R, can, even if you only need to do this once.
+- Someone else could execute this same exact code, as long as they're using R and they'll, as long as the URL and the website hasn't change, they'll download the same data site, the same dataset.
+- Now, of course there are many things that are out of your control, so for, so for example, if you don't run the website then You'll have to depend on the operators of the website not making lots of changes. But to, to the extent that things are in your control, the more that you can code things like this for example, this simple download.file function the better you'll be.
+
+<hr>
+
+### 1.3 Use Some Version Control
+
+- Slow things down
+- Add changes in small chunks (don't just do one massive commit)
+- Track / tag snapshots; revert to old versions
+- Software like GitHub / BitBucket / SourceForge make it easy to publish results
+
+<hr>
+
+- Use some sort of version control software
+- There are many different types of software, example: `Git` which is a very nice version control software and it's coupled with nice websites like `GitHub` and `BitBucket` which can be used to kind of publish code and other types of projects.
+
+#### 1.3.1 Slow things down
+
+- The main feature to keep in mind when you use a version control system in a data analysis project is that it helps to slow you down a little bit
+- that might sound like a bad thing but slowing people down is often good, because we often, when you have a project and you're very excited about the data, and you want to get into it. 
+- You just start doing things and you start working with the data, and you're not really keeping track of what's happening. 
+- So the version control software whatever it is that you use will help to kind of make you stop, think about what's been done, think about what changes have been made, commit changes to a repository so that you can have a record of what's been done. And then kind of move along step by step and this is useful for a data analysis because you have a log of kind of what has happened and what and what direction you've gone. 
+- If you want to go back, you can go back and there's a record of what you found.
+- So, for example, your exploratory analysis or whatever it is you're doing. You find something interesting. You have a history of kind of how you got there. And so, version control systems can be very useful for this type of for this purpose.
+
+#### 1.3.2 Add changes in small chunks (don't just do one massive commit)
+
+- Of course software like Git can be used to track and tag snapshots of the project. You can revert to old versions. All of this kind of stuff is pretty standard in version control systems. And so it's useful if you can to as you're progressing in a project to add project, to add changes in small chunks. 
+- Don't just add like 100 files at once in a massive commit. But, if you can break your analysis down into logical pieces and add them piece at a time, this will help you into in reading the history and understanding kind of what was done in the past.
+
+<hr>
+
+### 1.4 Keep Track of Your Software Environment
+
+If you work on a complex project involving many tools / datasets, the software and computing environment can be critical for reproducing your analysis
+
+- **Computer architecture**: CPU (Intel, AMD, ARM), GPUs
+- **Operating system**: Windows, Mac OS, Linux / Unix
+- **Software toolchain**: Compilers, interpreters, command shell, programming languages (C, Perl,Python, etc.), database backends, data analysis software
+- **Supporting software/infrastructure**: Libraries, R packages, dependencies
+- **External dependencies**: Web sites, data repositories, remote databases, software repositories
+- **Version numbers**: Ideally, for everything (if available)
+
+<hr>
+
+- Keeping track of your software environment is very important for reproducibility because a lot of complex projects will involve chaining together many tools and merging different datasets and some tools and datasets may only work with certain environments.And so the software in the general computing environment can be critical for reproducing an analysis.
+- So, there are a number of different features that you might want to keep track of in your software environment and not all of them are necessarily critical for every type of project but just keep a couple things in mind. Which are fairly common.
+
+#### 1.4.1 Computer architecture: CPU (Intel, AMD, ARM), GPUs
+
+- The first is your computer architecture and this is generally, it's usually not too important it was probably more important in the past. But but a general understanding of what kind of computer architecture you're working on is useful if you need to communicate that to someone else. So the CPU that you are using, is it an Intel chip, is an AMD chip, an ARM chip. Who makes the CPU can be useful.
+
+- Another aspect of that is whether it's 32-bit or 64-bit that can have an impact on some software. Are you using graphical processing units or GPUs. Things like that are useful to keep, to kind of have in your mind to keep track of.
+
+#### 1.4.2 Operating system: Windows, Mac OS, Linux / Unix
+
+- The operating system can be very important. So, are you using a Windows operating system, Mac OS, Linux, Unix? Some other version of Linux? This can be very important because some software only works on Windows. Some only works on the Mac, etc. like that. So, if someone wants to reproduce what you've done. And you've used a piece of software that only runs on Windows. Then they're going to have to find themself a Window, a Windows machine or use a Windows emulator.
+
+#### 1.4.3 Software toolchain: Compilers, interpreters, command shell, programming languages (C, Perl,Python, etc.), database backends, data analysis software
+
+- Your software tool chain is very important and typically you'll be using lots of different pieces of software. Some of it will be standard for example the Web browser pretty much everyone will have a Web browser. But things like compilers and interpreters the shell that you're using, are you using the Bash shell or something like that. 
+
+- Different programming languages that you use, C, Perl, Python, R or whatever it is. If you're using different database back-ends, it's important to know which ones you're using to any data analysis software. All these things should be noted because people, if someone wants to reproduce what you've done, they're going to have to reproduce this entire environment, all the compilers that you used, etc. things like that. And so, that's very important to keep in mind. 
+
+#### 1.4.4 Supporting software / infrastructure: Libraries, R packages, dependencies
+
+- Any supporting software particularly things like libraries software libraries or R packages, which are, and other types of dependencies are going to be important to keep track of. 
+
+#### 1.4.5 External dependencies: Web sites, data repositories, remote databases, software repositories
+
+- Any external dependencies so these are things that are kind of outside your computer. You know external websites. Are you downloading data from, from central repositories. Are there other remote databases that you'll be querying. Do you get your software from other software repositories. So things like that. Maybe important for your analysis.
+
+#### 1.4.6 Version numbers: Ideally, for everything (if available)
+
+- And for all of these things, it's usually important to keep track of the version numbers because as other people develop the software they're going to make changes that may break dependencies And so, if your project was done with a certain version of an operating system or software it may be that it's only reproducible using that version and that future versions are not or cannot be used. So, knowing the exact version number for everything if it's available, is important to keep a note of. 
+
+<hr>
+
+- So for example, is in R. If you use the sessionInfo function. it'll tell you as much as it can about your environment. 
+
+```{r}
+sessionInfo()
+```
+
+<hr>
+
+### 1.5 Set Your Seed
+
+- If you ever generate random numbers, almost all random number generators will generate pseudo random numbers based on a initially given number, something called a seed.
+
+- The seed is usually a number or a set of numbers that kind of initialize the random number generator and the the random number generator kind of goes in a sequence and generates random numbers based on the seed <br><br>
+
+- for example in R, you can use the `set.seed` function. And you just give it a single integer which will you will initialize the random number generator and then generate a sequence of random numbers
+- if you call `set.seed` and then generate numbers that sequence of random numbers will be always be exactly reproduceable as long as you kind of set the seed again at a later time. 
+- so these are important for things like simulations. 
+
+```{r}
+set.seed(12345)
+
+rnorm(10)
+
+```
+
+- For things like markup chain Monte Carlo analysis. Anything that involves generating random numbers will need to set the seed. And so, you should always remember to do this, because otherwise you'll get, your numbers will just not be reproducible. And if you do an analysis, if you publish an analysis that's using random numbers that you don't use the seed, it's basically impossible to go back and try to figure out what it was. So think about this anytime you use random numbers.
+
+<hr>
+
+### 1.6 Think About the Entire Pipeline
+
+- Data analysis is a lengthy process; it is not just tables/figures/reports
+- Raw data → processed data → analysis → report
+- How you got the end is just as important as the end itself
+- The more of the data analysis pipeline you can make reproducible, the better for everyone
+
+<hr>
+
+- The entire process of data analysis and kind of working with data is usually a very long pipeline. And starting with very raw data, maybe you got it off the web, or you got it from some investigation or experiment. All the way to kind of cleaning it, to processing it, to analyzing it, to kind of making the summaries and figures. And then Generating the data and start generating the results. 
+- It's a very long process and you should think about that entire pipeline as you're working on it. And to think about how, whether each piece of it is reproducible. So as you go down on this pipeline, The thing about, how you get to the end is just as important as, the final product that you produce. - So the analysis of the report that you produce at the end There's going to be a small subset of all the work that you did to get there. And, but the fact of the matter is that all of the work that you did to get there is, just as important to keep track of and document. 
+- And as a general rule the more of the data analysis pipeline that you can make reproducible the better it is for you, the better it is for other people. And the more credible your results will be. So think about the entire pipeline It's all important. It's not just the final product that's important.
+
+<hr>
+
+## 2. Don't
+
+### 2.1 Do Things By Hand
+
+- If we boil everything down to one rule when it comes to reproducibility, it would be **don't do things by hand**. 
+- Doing things by hand is usually where most investigations get tripped up and things that were not reproducible come into play.  
+
+- Example:
+  - Editing spreadsheets of data to "clean it up"
+    - Removing outliers
+    - QA / QC
+    - Validating
+  - Editing tables or figures (e.g. rounding, formatting)
+  - Downloading data from a web site (clicking links in a web browser)
+  - Moving data around your computer; splitting / reformatting data files
+  - "We're just going to do this once...."
+
+- Things done by hand need to be precisely documented (this is harder than it sounds)
+
+<hr>
+
+#### Editing spreadsheets of data to "clean it up" (Removing outliers, QA/QC, Validating)
+  
+- If you use something like Microsoft Excel or similar type of program. It's all tempting to load the data in Excel and then just clean up some of the messy data.
+  - Like you might have some **outliers** that you just want to remove, or 
+  - if your doing some **QA/QC** on the data and some values might be out of the range or something like that so you just fix them right there.
+  - You might **validate** certain types of measurements like by using a couple of experts or something like that.
+- These kinds of things are very easy to do, particularly in spreadsheet programs and it's very tempting to do that but the problem with doing that in the spreadsheet analysis is that it's not really reproducible at all.
+- Unless you write down exactly what you did, and how you did it, and what were the criteria for doing certain things.
+- Editing a spreadsheet by hand is often not reproducible so you should try to avoid it if you can.
+
+#### Editing tables or figures (e.g. rounding, formatting)
+
+- Editing things like tables and figures maybe less of an issue but it still leads us to something that's not reproducible.
+For example,
+  - If you change the rounding in a table, or something like that.
+  - that can be lead to something that is not reproducible.
+  
+#### Downloading data from a web site (clicking links in a web browser)
+
+- Something as innocuous is maybe downloading data from a website, which you do you might have to do a lot, if you're assembling many different data sets.
+- You might think that well, this is very simple. I'm just going to open my web browser, click on a link, and download a data set. But that's again, that's something that you do by hand. And if you were going to tell someone else how to do it there would be a lengthy set of instructions.
+- You'd have to tell them what website to go to, what link to click on and etc.
+- So that's something that you should be careful about and you should make sure you write down everything that you did. Because it can determine whether someone else can kind of obtain the same data set to do the analysis that you did.
+
+#### Moving data around your computer; splitting / reformatting data files
+
+- you should be careful about even something simple like moving data around, moving files around on your computer or maybe taking a large data file and splitting it in half.
+- If you do these by hand, there's no record of you ever doing it. And, so someone wants to repeat what you did, they have no instructions for how to do it or where to move things or what to do.
+- So, you should think about this before you do them.
+- If you can and ask yourself if it's really necessary to do. And if it is then you should document it carefully.
+
+#### "We're just going to do this once...."
+
+- It's always very tempting especially in the beginning of analysis to think well, we're just going to do this once.
+- So we don't really need to, write a computer program to do it or something like that. Or write it down very carefully.   
+- For example you might only download the data just once. And so you don't need to kind of automate that procedure.
+  - But just be careful with any, if you find yourself saying we're going to do this just once, make sure you still, everything is documented and set to the point where someone else who doesn't know you or doesn't work with you could potentially repeat what you're about to do.
+
+### Things done by hand need to be precisely documented (this is harder than it sounds)
+
+- The general rule is that, why, the reason you shouldn't do things by hand is because anything that you do by hand has to be precisely documented.
+- And this is a task that is much, much harder than it sounds.
+- Because things, little details that you may not think are important are actually very important to other people when they don't have the same context and the same background that you have.
+
+<hr>
+
+### 2.2 Point And Click
+
+- Many data processing/statistical analysis packages have graphical user interfaces (GUIs)
+- GUIs are convenient/intuitive but the actions you take with a GUI can be difficult for others to reproduce
+- Some GUIs produce a log file or script which includes equivalent commands; these can be saved for later examination
+- In general, be careful with data analysis software that is highly interactive; ease of use can sometimes lead to non-reproducible analyses
+- Other interactive software, such as text editors, are usually fine
+
+#### 2.2.1 Many data processing/statistical analysis packages have graphical user interfaces (GUIs)
+
+- It is related to the first and involves not using the point and click type software.
+- There are a lot of software that has what are called graphical user interfaces, or GUIs.
+
+#### 2.2.2 GUIs are convenient/intuitive but the actions you take with a GUI can be difficult for others to reproduce
+
+- Graphical user interfaces are very convenient, they're very nice, they're often very intuitive and easy for most people to use, they don't involve a lot of instruction. And so it's nice to use a GUI and a lot of software has these types of interfaces.
+- But the problem is that a lot of the actions that you take with a GUI, like pointing and clicking are difficult for others to reproduce. 
+  - So unless you specifically write down, here, I clicked on this menu, and then I clicked on this option it's difficult for someone else to know exactly what you did.
+  - So that's the danger of using things, using graphical user interfaces in any type of data processing or statistical analysis.
+
+#### 2.2.3 Some GUIs produce a log file or script which includes equivalent commands; these can be saved for later examination
+
+- Some programs, if they have a GUI will produce the, a log file or a script that includes the kind of equivalent commands that to the pointing and clicking that you did.
+  - And so these log files and scripts can be saved and can be examined by another person in the future if they have to.
+
+#### 2.2.4 In general, be careful with data analysis software that is highly interactive; ease of use can sometimes lead to non-reproducible analyses
+  
+- So in general any data analysis software or data processing software that is highly interactive you should be careful of.
+  - Because interactive software tends to be very nice to use and you can kind of do a lot of exploratory things with it, but this ease of use can come at the price of reproducibility.
+  - And so just be careful when you are using interactive software that doesn't log what you do or keep track of the history.
+
+#### 2.2.5 Other interactive software, such as text editors, are usually fine
+- There may be other software packages that you use that are not directly related to the analysis of data or the data analysis pipeline Which may have GUI's and that's fine.
+- For example, like your graph editor may have a graphical user interface and that something you use to write the code or to write a report. And that is usually fine. 
+- Because your analysis may not depend critically on exactly which text editor you use. However, if on that rare case it does, then you need to be careful that everything is kind of appropriately documented.
+
+<hr>
+
+### 2.3 Save Output
+
+- Avoid saving data analysis output (tables, figures, summaries, processed data, etc.), except perhaps temporarily for efficiency purposes.
+- If a stray output file cannot be easily connected with the means by which it was created, then it is not reproducible.
+- Save the data + code that generated the output, rather than the output itself
+- Intermediate files are okay as long as there is clear documentation of how they were created
+
+<hr>
+
+#### 2.3.1 Avoid saving data analysis output (tables, figures, summaries, processed data, etc.), except perhaps temporarily for efficiency purposes.
+
+- One kind of quick rule that try to keep in mind when doing data analysis is the don't save any output. 
+- Now this may seem a little strange, because you need some output eventually, and yes, that's true.
+
+- You will need things like tables and figures and summaries so, if you're going to write a report or a paper or something like that.
+
+#### 2.3.2 If a stray output file cannot be easily connected with the means by which it was created, then it is not reproducible.
+
+- It's good to not keep that until the very end when you're actually doing that kind of end stage activity ,because a stray output file is just sitting in your project directory if you don't know where it came from or how you produced it is not reproducible.
+
+- So,if it's not reproducible its almost not worth saving at all because you'll always be wondering how you got those numbers or how you made that figure. 
+
+#### 2.3.3 Save the data + code that generated the output, rather than the output itself
+
+- So rather than save a piece of output like a table or a figure it's better to save the data and the code that generated that table or figure right, so, that way you can always reproduce whatever type of output that you need.
+
+#### 2.3.4 Intermediate files are okay as long as there is clear documentation of how they were created
+
+- Of course, in a very large project, there's going to be a very long pipeline of analysis that you do. So,maybe starting with raw data and then going to processed data and then maybe processing the data even more and then doing some analysis.
+- And so there may be a lot of intermediate files that are generated in this process. And that's fine. 
+- It's usually fine to keep those around because it will make the analysis much more efficient. Then if you have to kind of reproduce everything every single time. But if you do keep intermediate files around you have to make sure that, it's critical that you make sure that every intermediate file is documented. Then you have code that generates that intermediate file and that the data set that goes into it is, is clearly documented. So, it's it's usually better to not save any output because if you can save the code in the data instead but if you need to save things like intermediate files, then make sure you have the code and the data to go along with them. Uh,this one is a very specific issue, but it's very important because,it can lead to very non reproducible results.
+
+<hr>
+
+## 3. Checklist
+
+- Are we doing good science?
+- Was any part of this analysis done by hand?
+  - If so, are those parts precisely document?
+  - Does the documentation match reality?
+- Have we taught a computer to do as much as possible (i.e. coded)?
+- Are we using a version control system?
+- Have we documented our software environment?
+- Have we saved any output that we cannot reconstruct from original data + code?
+- How far back in the analysis pipeline can we go before our results are no longer (automatically) reproducible?
+
